@@ -2,9 +2,15 @@ package com.tcc.domain;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="pessoa")
 public class Pessoa implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	private String id;
 	private String nome;
 	private String endereco;
 	private String email;
@@ -12,11 +18,20 @@ public class Pessoa implements Serializable{
 	public Pessoa() {
 	}
 
-	public Pessoa(String nome, String endereco, String email) {
+	public Pessoa(String id, String nome, String endereco, String email) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.email = email;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getNome() {
