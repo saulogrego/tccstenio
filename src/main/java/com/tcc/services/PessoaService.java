@@ -30,6 +30,11 @@ public class PessoaService {
 		return pessoaRepository.insert(pessoa);
 	}
 	
+	public void delete(String id) {
+		findById(id);
+		pessoaRepository.deleteById(id);
+	}
+	
 	public Pessoa fromDTO(PessoaDTO pessoaDto) {
 		return new Pessoa(pessoaDto.getId(), pessoaDto.getNome(), pessoaDto.getEndereco(), pessoaDto.getEmail());
 	}
