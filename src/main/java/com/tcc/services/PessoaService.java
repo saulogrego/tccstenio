@@ -30,6 +30,12 @@ public class PessoaService {
 		return pessoaRepository.insert(pessoa);
 	}
 	
+	public Pessoa update(Pessoa pessoa) {
+		Pessoa newPessoa = findById(pessoa.getId());
+		updateData(newPessoa, pessoa);
+		return pessoaRepository.save(newPessoa);
+	}
+	
 	public void delete(String id) {
 		findById(id);
 		pessoaRepository.deleteById(id);
@@ -37,5 +43,11 @@ public class PessoaService {
 	
 	public Pessoa fromDTO(PessoaDTO pessoaDto) {
 		return new Pessoa(pessoaDto.getId(), pessoaDto.getNome(), pessoaDto.getEndereco(), pessoaDto.getEmail());
+	}
+	
+	public void updateData(Pessoa newPessoa, Pessoa pessoa) {
+		newPessoa.setNome(pessoa.getNome());
+		newPessoa.setEndereco(pessoa.getEndereco());
+		newPessoa.setEmail(pessoa.getEmail());
 	}
 }

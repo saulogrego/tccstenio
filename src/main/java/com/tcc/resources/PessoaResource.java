@@ -45,6 +45,14 @@ public class PessoaResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody PessoaDTO pessoaDto, @PathVariable String id){
+		Pessoa pessoa = pessoaService.fromDTO(pessoaDto);
+		pessoa.setId(id);
+		pessoa = pessoaService.update(pessoa);
+		return ResponseEntity.noContent().build();
+	}
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable String id){
 		pessoaService.delete(id);
