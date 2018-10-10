@@ -38,11 +38,11 @@ public class PessoaResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody PessoaDTO pessoaDto){
-		Pessoa pessoa = pessoaService.fromDTO(pessoaDto);
-		pessoa = pessoaService.insert(pessoa);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pessoa.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+	public ResponseEntity<Void> insert(@RequestBody Pessoa[] pessoas){
+		for (Pessoa pes : pessoas) {
+			pes = pessoaService.insert(pes);
+		}
+		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
